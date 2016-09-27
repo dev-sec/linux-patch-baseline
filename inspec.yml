@@ -1,0 +1,12 @@
+name: linux-patch-benchmark
+title: Linux Patch Benchmark
+summary: Verifies that all patches have been applied
+version: 0.1.0
+
+maintainer: Christoph Hartmann
+copyright: Christoph Hartmann
+copyright_email: chris@lollyrock.com
+license: MPLv2
+
+supports:
+  - os-family: linux
