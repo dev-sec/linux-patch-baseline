@@ -25,9 +25,17 @@ platforms:
 - name: centos-6.7
   driver:
     image: centos:6.7
+- name: centos-6.8
+  driver:
+    image: centos:6.8
 - name: centos-7
   driver:
     image: centos:7
+    privileged: true
+    run_command: /usr/sbin/init
+- name: centos-7.2
+  driver:
+    image: centos:7.2.1511
     privileged: true
     run_command: /usr/sbin/init
 - name: debian-7
