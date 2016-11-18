@@ -113,6 +113,12 @@ python -c 'import sys; sys.path.insert(0, "/usr/share/yum-cli"); import cli; lis
 EOH
     cmd = @inspec.command(rhel_updates)
     first = cmd.stdout.index('{')
+    if first == nil || cmd.stdout.size == nil
+      puts "*** cmd.stdout='#{cmd.stdout}'"
+      puts "*** cmd.stderr='#{cmd.stderr}'"
+      puts "*** first='#{first}'"
+      puts "*** cmd.stdout.size='#{cmd.stdout.size}'"
+    end
     res = cmd.stdout.slice(first, cmd.stdout.size - first)
     begin
       JSON.parse(res)
