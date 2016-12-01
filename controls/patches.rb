@@ -10,8 +10,8 @@
 control 'verify-patches' do
   impact 0.3
   title "All patches should be installed"
-  describe linux_update.updates.length do
-    it { should eq 0}
+  describe linux_update do
+    it { should be_uptodate}
   end
 end
 
