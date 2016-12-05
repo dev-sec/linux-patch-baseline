@@ -28,6 +28,12 @@ class LinuxUpdateManager < Inspec.resource(1)
     u['available']
   end
 
+  def uptodate?
+    u = @update_mgmt.updates
+    return false if u.nil? || !u['available'].empty?
+    true
+  end
+
   def packages
     p = @update_mgmt.packages
     return [] if p.nil? || u.empty?
@@ -53,10 +59,10 @@ class UpdateFetcher
   end
 
   def parse_json(script)
-    cmd = @inspec.command(script)
+    cmd = @inspec.bash(script)
     begin
       JSON.parse(cmd.stdout)
-    rescue JSON::ParserError => _e
+    rescue JSON::ParserError => e
       return []
     end
   end
@@ -111,13 +117,19 @@ EOH
 #!/bin/sh
 python -c 'import sys; sys.path.insert(0, "/usr/share/yum-cli"); import cli; list = cli.YumBaseCli().returnPkgLists(["updates"]);res = ["{\\"name\\":\\""+x.name+"\\", \\"version\\":\\""+x.version+"-"+x.release+"\\",\\"arch\\":\\""+x.arch+"\\",\\"repository\\":\\""+x.repo.id+"\\"}" for x in list.updates]; print "{\\"available\\":["+",".join(res)+"]}"'
 EOH
-    cmd = @inspec.command(rhel_updates)
+    puts rhel_updates
+    cmd = @inspec.bash(rhel_updates)
+    unless cmd.exit_status == 0
+      # essentially we want https://github.com/chef/inspec/issues/1205
+      STDERR.puts "Could not determine patch status."
+      return nil
+    end
+
     first = cmd.stdout.index('{')
     res = cmd.stdout.slice(first, cmd.stdout.size - first)
     begin
       JSON.parse(res)
     rescue JSON::ParserError => e
-      puts
       return []
     end
   end

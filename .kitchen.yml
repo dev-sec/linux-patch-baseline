@@ -8,6 +8,7 @@ provisioner:
 
 verifier:
   name: inspec
+  sudo: true
 
 platforms:
 - name: ubuntu-12.04
