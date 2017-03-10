@@ -16,32 +16,35 @@ class LinuxUpdateManager < Inspec.resource(1)
   def initialize
     if inspec.os.redhat?
       @update_mgmt = RHELUpdateFetcher.new(inspec)
-    else inspec.os.debian?
+    elsif inspec.os.debian?
       @update_mgmt = UbuntuUpdateFetcher.new(inspec)
     end
     return skip_resource 'The `linux_update` resource is not supported on your OS.' if @update_mgmt.nil?
   end
 
   def updates
+    return [] if @update_mgmt.nil?
     u = @update_mgmt.updates
     return [] if u.nil? || u.empty?
     u['available']
   end
 
   def uptodate?
+    return nil if @update_mgmt.nil?
     u = @update_mgmt.updates
     return false if u.nil? || !u['available'].empty?
     true
   end
 
   def packages
+    return [] if @update_mgmt.nil?
     p = @update_mgmt.packages
     return [] if p.nil? || u.empty?
     p['installed']
   end
 
   def to_s
-    "Linux Update"
+    'Linux Update'
   end
 end
 
@@ -62,24 +65,15 @@ class UpdateFetcher
     cmd = @inspec.bash(script)
     begin
       JSON.parse(cmd.stdout)
-    rescue JSON::ParserError => e
+    rescue JSON::ParserError => _e
       return []
     end
   end
 end
 
 class UbuntuUpdateFetcher < UpdateFetcher
-  # ubuntu base
-  UBUNTU_BASE = <<-EOH
-#!/bin/sh
-DEBIAN_FRONTEND=noninteractive apt-get update >/dev/null 2>&1
-readlock() { cat /proc/locks | awk '{print $5}' | grep -v ^0 | xargs -I {1} find /proc/{1}/fd -maxdepth 1 -exec readlink {} \\; | grep '^/var/lib/dpkg/lock$'; }
-while test -n "$(readlock)"; do sleep 1; done
-echo " "
-  EOH
-
   def packages
-    ubuntu_packages = UBUNTU_BASE + <<-EOH
+    ubuntu_packages = ubuntu_base + <<-EOH
 echo -n '{"installed":['
 dpkg-query -W -f='${Status}\\t${Package}\\t${Version}\\t${Architecture}\\n' |\\
   grep '^install ok installed\\s' |\\
@@ -90,13 +84,26 @@ EOH
   end
 
   def updates
-    ubuntu_updates = UBUNTU_BASE + <<-EOH
+    ubuntu_updates = ubuntu_base + <<-EOH
 echo -n '{"available":['
 DEBIAN_FRONTEND=noninteractive apt-get upgrade --dry-run | grep Inst | tr -d '[]()' |\\
   awk '{ printf "{\\"name\\":\\""$2"\\",\\"version\\":\\""$4"\\",\\"repo\\":\\""$5"\\",\\"arch\\":\\""$6"\\"}," }' | rev | cut -c 2- | rev | tr -d '\\n'
 echo -n ']}'
 EOH
     parse_json(ubuntu_updates)
+  end
+
+  private
+
+  def ubuntu_base
+    base = <<-EOH
+  #!/bin/sh
+  DEBIAN_FRONTEND=noninteractive apt-get update >/dev/null 2>&1
+  readlock() { cat /proc/locks | awk '{print $5}' | grep -v ^0 | xargs -I {1} find /proc/{1}/fd -maxdepth 1 -exec readlink {} \\; | grep '^/var/lib/dpkg/lock$'; }
+  while test -n "$(readlock)"; do sleep 1; done
+  echo " "
+    EOH
+    base
   end
 end
 
@@ -121,7 +128,7 @@ EOH
     cmd = @inspec.bash(rhel_updates)
     unless cmd.exit_status == 0
       # essentially we want https://github.com/chef/inspec/issues/1205
-      STDERR.puts "Could not determine patch status."
+      STDERR.puts 'Could not determine patch status.'
       return nil
     end
 
@@ -129,7 +136,7 @@ EOH
     res = cmd.stdout.slice(first, cmd.stdout.size - first)
     begin
       JSON.parse(res)
-    rescue JSON::ParserError => e
+    rescue JSON::ParserError => _e
       return []
     end
   end
