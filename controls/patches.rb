@@ -23,4 +23,5 @@ control 'patches' do
       its('version') { should eq update['version'] }
     end
   }
+  only_if { linux_update.updates.length > 0 }
 end
