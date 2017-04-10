@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 gem 'rake'
 gem 'rack', '1.6.4'
 gem 'inspec', '~> 1'
-gem 'rubocop', '~> 0.44.0'
 gem 'highline', '~> 1.6.0'
+gem 'rubocop', '~>0.46.0'
 
 group :integration do
   gem 'berkshelf'
