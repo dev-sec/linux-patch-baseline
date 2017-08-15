@@ -13,11 +13,22 @@ class LinuxUpdateManager < Inspec.resource(1)
   name 'linux_update'
   desc 'Use the linux_update InSpec audit resource to test for available or installed updates'
 
+  # def initialize
+  #   if inspec.os.redhat?
+  #     @update_mgmt = RHELUpdateFetcher.new(inspec)
+  #   elsif inspec.os.debian?
+  #     @update_mgmt = UbuntuUpdateFetcher.new(inspec)
+  #   end
+  #   return skip_resource 'The `linux_update` resource is not supported on your OS.' if @update_mgmt.nil?
+  # end
+
+  # Since Amazon Linux is based on RedHat, they may use the same method.
   def initialize
-    if inspec.os.redhat?
-      @update_mgmt = RHELUpdateFetcher.new(inspec)
-    elsif inspec.os.debian?
-      @update_mgmt = UbuntuUpdateFetcher.new(inspec)
+    case inspec.os[:family]
+      when 'redhat', 'amazon'
+        @update_mgmt = RHELUpdateFetcher.new(inspec)
+      when 'debian'
+        @update_mgmt = UbuntuUpdateFetcher.new(inspec)
     end
     return skip_resource 'The `linux_update` resource is not supported on your OS.' if @update_mgmt.nil?
   end
