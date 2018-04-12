@@ -1,5 +1,22 @@
 # Change Log
 
+## [0.4.0](https://github.com/dev-sec/linux-patch-baseline/tree/0.4.0) (2018-04-12)
+[Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.3.0...0.4.0)
+
+**Closed issues:**
+
+- inspec exec --format=json option is breaking json parser for this profile [\#13](https://github.com/dev-sec/linux-patch-baseline/issues/13)
+
+**Merged pull requests:**
+
+- fix vulnerable rubocop version for testing [\#17](https://github.com/dev-sec/linux-patch-baseline/pull/17) ([arlimus](https://github.com/arlimus))
+- print system patches in a nicer way [\#16](https://github.com/dev-sec/linux-patch-baseline/pull/16) ([arlimus](https://github.com/arlimus))
+- add suse support [\#15](https://github.com/dev-sec/linux-patch-baseline/pull/15) ([arlimus](https://github.com/arlimus))
+- Remove puts from updates [\#14](https://github.com/dev-sec/linux-patch-baseline/pull/14) ([coolguru](https://github.com/coolguru))
+- fix linting errors [\#12](https://github.com/dev-sec/linux-patch-baseline/pull/12) ([arlimus](https://github.com/arlimus))
+- Changed the method LinuxUpdateManager.initialize to add support to Amazon Linux [\#11](https://github.com/dev-sec/linux-patch-baseline/pull/11) ([jonasduarte](https://github.com/jonasduarte))
+- use recommended spdx license identifier [\#9](https://github.com/dev-sec/linux-patch-baseline/pull/9) ([chris-rock](https://github.com/chris-rock))
+
 ## [0.3.0](https://github.com/dev-sec/linux-patch-baseline/tree/0.3.0) (2017-05-08)
 [Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.2.0...0.3.0)
 
