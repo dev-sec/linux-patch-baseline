@@ -33,7 +33,7 @@ class LinuxUpdateManager < Inspec.resource(1)
     when 'suse'
       @update_mgmt = SuseUpdateFetcher.new(inspec)
     end
-    return skip_resource 'The `linux_update` resource is not supported on your OS.' if @update_mgmt.nil?
+    skip_resource 'The `linux_update` resource is not supported on your OS.' if @update_mgmt.nil?
   end
 
   def updates
@@ -150,57 +150,57 @@ end
 
 class UbuntuUpdateFetcher < UpdateFetcher
   def packages
-    ubuntu_packages = ubuntu_base + <<-EOH
+    ubuntu_packages = ubuntu_base + <<-PRINT_JSON
 echo -n '{"installed":['
 dpkg-query -W -f='${Status}\\t${Package}\\t${Version}\\t${Architecture}\\n' |\\
   grep '^install ok installed\\s' |\\
   awk '{ printf "{\\"name\\":\\""$4"\\",\\"version\\":\\""$5"\\",\\"arch\\":\\""$6"\\"}," }' | rev | cut -c 2- | rev | tr -d '\\n'
 echo -n ']}'
-EOH
+PRINT_JSON
     parse_json(ubuntu_packages)
   end
 
   def updates
-    ubuntu_updates = ubuntu_base + <<-EOH
+    ubuntu_updates = ubuntu_base + <<-PRINT_JSON
 echo -n '{"available":['
 DEBIAN_FRONTEND=noninteractive apt-get upgrade --dry-run | grep Inst | tr -d '[]()' |\\
   awk '{ printf "{\\"name\\":\\""$2"\\",\\"version\\":\\""$4"\\",\\"repo\\":\\""$5"\\",\\"arch\\":\\""$6"\\"}," }' | rev | cut -c 2- | rev | tr -d '\\n'
 echo -n ']}'
-EOH
+PRINT_JSON
     parse_json(ubuntu_updates)
   end
 
   private
 
   def ubuntu_base
-    base = <<-EOH
-  #!/bin/sh
-  DEBIAN_FRONTEND=noninteractive apt-get update >/dev/null 2>&1
-  readlock() { cat /proc/locks | awk '{print $5}' | grep -v ^0 | xargs -I {1} find /proc/{1}/fd -maxdepth 1 -exec readlink {} \\; | grep '^/var/lib/dpkg/lock$'; }
-  while test -n "$(readlock)"; do sleep 1; done
-  echo " "
-    EOH
+    base = <<-PRINT_JSON
+#!/bin/sh
+DEBIAN_FRONTEND=noninteractive apt-get update >/dev/null 2>&1
+readlock() { cat /proc/locks | awk '{print $5}' | grep -v ^0 | xargs -I {1} find /proc/{1}/fd -maxdepth 1 -exec readlink {} \\; | grep '^/var/lib/dpkg/lock$'; }
+while test -n "$(readlock)"; do sleep 1; done
+echo " "
+PRINT_JSON
     base
   end
 end
 
 class RHELUpdateFetcher < UpdateFetcher
   def packages
-    rhel_packages = <<-EOH
+    rhel_packages = <<-PRINT_JSON
 sleep 2 && echo " "
 echo -n '{"installed":['
 rpm -qa --queryformat '"name":"%{NAME}","version":"%{VERSION}-%{RELEASE}","arch":"%{ARCH}"\\n' |\\
   awk '{ printf "{"$1"}," }' | rev | cut -c 2- | rev | tr -d '\\n'
 echo -n ']}'
-EOH
+PRINT_JSON
     parse_json(rhel_packages)
   end
 
   def updates
-    rhel_updates = <<-EOH
+    rhel_updates = <<-PRINT_JSON
 #!/bin/sh
 python -c 'import sys; sys.path.insert(0, "/usr/share/yum-cli"); import cli; list = cli.YumBaseCli().returnPkgLists(["updates"]);res = ["{\\"name\\":\\""+x.name+"\\", \\"version\\":\\""+x.version+"-"+x.release+"\\",\\"arch\\":\\""+x.arch+"\\",\\"repository\\":\\""+x.repo.id+"\\"}" for x in list.updates]; print "{\\"available\\":["+",".join(res)+"]}"'
-EOH
+PRINT_JSON
     cmd = @inspec.bash(rhel_updates)
     unless cmd.exit_status == 0
       # essentially we want https://github.com/chef/inspec/issues/1205
