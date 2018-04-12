@@ -8,6 +8,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 require 'json'
+require 'rexml/document'
 
 class LinuxUpdateManager < Inspec.resource(1)
   name 'linux_update'
@@ -29,6 +30,8 @@ class LinuxUpdateManager < Inspec.resource(1)
       @update_mgmt = RHELUpdateFetcher.new(inspec)
     when 'debian'
       @update_mgmt = UbuntuUpdateFetcher.new(inspec)
+    when 'suse'
+      @update_mgmt = SuseUpdateFetcher.new(inspec)
     end
     return skip_resource 'The `linux_update` resource is not supported on your OS.' if @update_mgmt.nil?
   end
@@ -44,6 +47,8 @@ class LinuxUpdateManager < Inspec.resource(1)
     return nil if @update_mgmt.nil?
     u = @update_mgmt.updates
     return false if u.nil? || !u['available'].empty?
+    l = @update_mgmt.patches
+    return false if l.nil? || !l.empty?
     true
   end
 
@@ -52,6 +57,11 @@ class LinuxUpdateManager < Inspec.resource(1)
     p = @update_mgmt.packages
     return [] if p.nil? || u.empty?
     p['installed']
+  end
+
+  def patches
+    return [] if @update_mgmt.nil?
+    @update_mgmt.patches || []
   end
 
   def to_s
@@ -72,6 +82,10 @@ class UpdateFetcher
     []
   end
 
+  def patches
+    []
+  end
+
   def parse_json(script)
     cmd = @inspec.bash(script)
     begin
@@ -79,6 +93,52 @@ class UpdateFetcher
     rescue JSON::ParserError => _e
       return []
     end
+  end
+end
+
+class SuseUpdateFetcher < UpdateFetcher
+  def patches
+    out = zypper_xml('list-updates -t patch')
+    xml = REXML::Document.new(out)
+
+    extract_xml_updates(REXML::XPath.first(xml, '//update-list')) +
+      extract_xml_updates(REXML::XPath.first(xml, '//blocked-update-list'))
+  end
+
+  def updates
+    out = zypper_xml('list-updates')
+    xml = REXML::Document.new(out)
+
+    res = extract_xml_updates(REXML::XPath.first(xml, '//update-list')) +
+          extract_xml_updates(REXML::XPath.first(xml, '//blocked-update-list'))
+
+    { 'available' => res }
+  end
+
+  private
+
+  def zypper_xml(cmd)
+    out = @inspec.command('zypper --xmlout '+cmd)
+    if out.exit_status != 0
+      fail_resource('Cannot retrieve package updates from the OS: '+out.stderr)
+    end
+    out.stdout.force_encoding('UTF-8')
+  end
+
+  def extract_xml_updates(updates_el)
+    res = []
+    return res if updates_el.nil?
+
+    REXML::XPath.each(updates_el, 'update') do |el|
+      a = el.attributes
+      r = { 'name' => a['name'] }
+      r['version'] = a['edition'] unless a['arch'].nil?
+      r['arch'] = a['arch'] unless a['arch'].nil?
+      r['category'] = a['category'] unless a['category'].nil?
+      r['severity'] = a['severity'] unless a['severity'].nil?
+      res.push(r)
+    end
+    res
   end
 end
 

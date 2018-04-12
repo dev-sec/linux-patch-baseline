@@ -9,6 +9,7 @@ This [InSpec](http://inspec.io/) profile verifies that all updates have been ins
 - RHEL 6/7
 - CentOS 6/7
 - Ubuntu 12.04+
+- OpenSUSE, SuSE 11/12
 
 ## License
 
