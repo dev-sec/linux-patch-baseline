@@ -17,11 +17,21 @@ end
 
 control 'patches' do
   impact 0.3
-  title 'All operating system updates are installed'
+  title 'All operating system package updates are installed'
   linux_update.updates.each { |update|
     describe package(update['name']) do
       its('version') { should eq update['version'] }
     end
   }
   only_if { linux_update.updates.length > 0 }
+end
+
+control 'os-patches' do
+  impact 0.3
+  title 'All operating system patches are installed'
+  linux_update.patches.each do |patch|
+    describe patch do
+      it { should be_nil }
+    end
+  end
 end
