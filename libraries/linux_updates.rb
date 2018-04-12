@@ -96,6 +96,15 @@ class UpdateFetcher
   end
 end
 
+PatchEntry = Struct.new(:name, :version, :arch, :category, :severity) do
+  def to_s
+    r = "System Patch #{name} (v#{version} #{arch}"
+    r+= ", #{category}" unless category.nil?
+    r+= ", #{severity}" unless severity.nil?
+    r + ')'
+  end
+end
+
 class SuseUpdateFetcher < UpdateFetcher
   def patches
     out = zypper_xml('list-updates -t patch')
@@ -131,12 +140,9 @@ class SuseUpdateFetcher < UpdateFetcher
 
     REXML::XPath.each(updates_el, 'update') do |el|
       a = el.attributes
-      r = { 'name' => a['name'] }
-      r['version'] = a['edition'] unless a['arch'].nil?
-      r['arch'] = a['arch'] unless a['arch'].nil?
-      r['category'] = a['category'] unless a['category'].nil?
-      r['severity'] = a['severity'] unless a['severity'].nil?
-      res.push(r)
+      res.push(
+        PatchEntry.new(a['name'], a['edition'], a['arch'], a['category'], a['severity']),
+      )
     end
     res
   end
