@@ -47,6 +47,8 @@ class LinuxUpdateManager < Inspec.resource(1)
     return nil if @update_mgmt.nil?
     u = @update_mgmt.updates
     return false if u.nil? || !u['available'].empty?
+    l = @update_mgmt.patches
+    return false if l.nil? || !l.empty?
     true
   end
 
