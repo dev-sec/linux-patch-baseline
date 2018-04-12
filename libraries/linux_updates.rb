@@ -108,9 +108,9 @@ class SuseUpdateFetcher < UpdateFetcher
     xml = REXML::Document.new(out)
 
     res = extract_xml_updates(REXML::XPath.first(xml, '//update-list')) +
-      extract_xml_updates(REXML::XPath.first(xml, '//blocked-update-list'))
+          extract_xml_updates(REXML::XPath.first(xml, '//blocked-update-list'))
 
-    {'available' => res}
+    { 'available' => res }
   end
 
   private
@@ -125,11 +125,11 @@ class SuseUpdateFetcher < UpdateFetcher
 
   def extract_xml_updates(updates_el)
     res = []
-    return res if(updates_el == nil)
+    return res if updates_el.nil?
 
     REXML::XPath.each(updates_el, 'update') do |el|
       a = el.attributes
-      r = {'name' => a['name']}
+      r = { 'name' => a['name'] }
       r['version'] = a['edition'] unless a['arch'].nil?
       r['arch'] = a['arch'] unless a['arch'].nil?
       r['category'] = a['category'] unless a['category'].nil?
