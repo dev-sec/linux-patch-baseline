@@ -55,7 +55,7 @@ class LinuxUpdateManager < Inspec.resource(1)
   def packages
     return [] if @update_mgmt.nil?
     p = @update_mgmt.packages
-    return [] if p.nil? || u.empty?
+    return [] if p.nil? || p.empty?
     p['installed']
   end
 
