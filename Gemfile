@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
-gem 'rake'
-gem 'rack', '1.6.4'
-gem 'inspec', '~> 1'
-gem 'highline', '~> 1.6.0'
-gem 'rubocop', '~>0.54.0'
+gem 'rake', '~> 12.3.2'
+gem 'rack', '~> 2.0.7'
+gem 'inspec', '~> 3'
+gem 'highline', '~> 2.0.2'
+gem 'rubocop', '~> 0.68.1'
 
 group :integration do
   gem 'berkshelf'
@@ -14,5 +16,6 @@ group :integration do
 end
 
 group :tools do
-  gem 'github_changelog_generator', '~> 1.12.0'
+  gem 'github_changelog_generator', '~> 1.14.3'
+  gem 'pry-coolline', '~> 0.2.5'
 end
