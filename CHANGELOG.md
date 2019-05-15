@@ -1,5 +1,19 @@
 # Change Log
 
+## [0.5.0](https://github.com/dev-sec/linux-patch-baseline/tree/0.5.0) (2019-05-14)
+[Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.4.0...0.5.0)
+
+**Closed issues:**
+
+- Redhat update check only works if user has root access. [\#19](https://github.com/dev-sec/linux-patch-baseline/issues/19)
+
+**Merged pull requests:**
+
+- Update issue templates [\#21](https://github.com/dev-sec/linux-patch-baseline/pull/21) ([rndmh3ro](https://github.com/rndmh3ro))
+- allow yum to run as non-root user. [\#20](https://github.com/dev-sec/linux-patch-baseline/pull/20) ([iveskins](https://github.com/iveskins))
+- small typo in the packages method [\#18](https://github.com/dev-sec/linux-patch-baseline/pull/18) ([aaronlippold](https://github.com/aaronlippold))
+- fix \#3 [\#4](https://github.com/dev-sec/linux-patch-baseline/pull/4) ([chris-rock](https://github.com/chris-rock))
+
 ## [0.4.0](https://github.com/dev-sec/linux-patch-baseline/tree/0.4.0) (2018-04-12)
 [Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.3.0...0.4.0)
 
@@ -36,7 +50,6 @@
 
 **Merged pull requests:**
 
-- fix \#3 [\#4](https://github.com/dev-sec/linux-patch-baseline/pull/4) ([chris-rock](https://github.com/chris-rock))
 - add basic test-kitchen config [\#1](https://github.com/dev-sec/linux-patch-baseline/pull/1) ([chris-rock](https://github.com/chris-rock))
 
 ## [0.1.0](https://github.com/dev-sec/linux-patch-baseline/tree/0.1.0) (2016-09-27)
