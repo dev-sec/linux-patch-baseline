@@ -1,8 +1,8 @@
 # Changelog
 
-## [0.3.1](https://github.com/dev-sec/linux-patch-baseline/tree/0.3.1) (2020-05-19)
+## [0.6.0](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.0) (2020-05-19)
 
-[Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.5.0...0.3.1)
+[Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.5.0...0.6.0)
 
 **Closed issues:**
 
