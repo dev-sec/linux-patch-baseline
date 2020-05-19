@@ -22,6 +22,7 @@
 
 **Merged pull requests:**
 
+- align versions [\#27](https://github.com/dev-sec/linux-patch-baseline/pull/27) ([micheelengronne](https://github.com/micheelengronne))
 - Bump version to 0.5.0 and switch to inspec 3 for check [\#23](https://github.com/dev-sec/linux-patch-baseline/pull/23) ([alexpop](https://github.com/alexpop))
 - Update issue templates [\#21](https://github.com/dev-sec/linux-patch-baseline/pull/21) ([rndmh3ro](https://github.com/rndmh3ro))
 - allow yum to run as non-root user. [\#20](https://github.com/dev-sec/linux-patch-baseline/pull/20) ([iveskins](https://github.com/iveskins))
