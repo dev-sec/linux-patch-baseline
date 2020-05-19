@@ -1,12 +1,11 @@
+---
 name: linux-patch-baseline
 title: DevSec Linux Patch Benchmark
 summary: Verifies that all patches have been applied
-version: 0.5.0
-
+version: 0.3.1
 maintainer: Christoph Hartmann
 copyright: Christoph Hartmann
 copyright_email: chris@lollyrock.com
 license: MPL-2.0
-
 supports:
   - os-family: linux
