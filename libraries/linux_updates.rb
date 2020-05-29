@@ -18,7 +18,7 @@ class LinuxUpdateManager < Inspec.resource(1)
   #   if inspec.os.redhat?
   #     @update_mgmt = RHELUpdateFetcher.new(inspec)
   #   elsif inspec.os.debian?
-  #     @update_mgmt = UbuntuUpdateFetcher.new(inspec)
+  #     @update_mgmt = DebianUpdateFetcher.new(inspec)
   #   end
   #   return skip_resource 'The `linux_update` resource is not supported on your OS.' if @update_mgmt.nil?
   # end
@@ -29,7 +29,7 @@ class LinuxUpdateManager < Inspec.resource(1)
     when 'redhat', 'amazon'
       @update_mgmt = RHELUpdateFetcher.new(inspec)
     when 'debian'
-      @update_mgmt = UbuntuUpdateFetcher.new(inspec)
+      @update_mgmt = DebianUpdateFetcher.new(inspec)
     when 'suse'
       @update_mgmt = SuseUpdateFetcher.new(inspec)
     end
@@ -156,36 +156,40 @@ class SuseUpdateFetcher < UpdateFetcher
   end
 end
 
-class UbuntuUpdateFetcher < UpdateFetcher
+class DebianUpdateFetcher < UpdateFetcher
   def packages
-    ubuntu_packages = ubuntu_base + <<-PRINT_JSON
+    debian_packages = debian_base + <<-PRINT_JSON
 echo -n '{"installed":['
 dpkg-query -W -f='${Status}\\t${Package}\\t${Version}\\t${Architecture}\\n' |\\
   grep '^install ok installed\\s' |\\
   awk '{ printf "{\\"name\\":\\""$4"\\",\\"version\\":\\""$5"\\",\\"arch\\":\\""$6"\\"}," }' | rev | cut -c 2- | rev | tr -d '\\n'
 echo -n ']}'
     PRINT_JSON
-    parse_json(ubuntu_packages)
+    parse_json(debian_packages)
   end
 
   def updates
-    ubuntu_updates = ubuntu_base + <<-PRINT_JSON
+    debian_updates = debian_base + <<-PRINT_JSON
 echo -n '{"available":['
-DEBIAN_FRONTEND=noninteractive apt-get upgrade --dry-run | grep Inst | tr -d '[]()' |\\
+DEBIAN_FRONTEND=noninteractive apt upgrade --dry-run | grep Inst | tr -d '[]()' |\\
   awk '{ printf "{\\"name\\":\\""$2"\\",\\"version\\":\\""$4"\\",\\"repo\\":\\""$5"\\",\\"arch\\":\\""$6"\\"}," }' | rev | cut -c 2- | rev | tr -d '\\n'
 echo -n ']}'
     PRINT_JSON
-    parse_json(ubuntu_updates)
+    parse_json(debian_updates)
   end
 
   private
 
-  def ubuntu_base
+  def debian_base
     base = <<-PRINT_JSON
 #!/bin/sh
-DEBIAN_FRONTEND=noninteractive apt-get update >/dev/null 2>&1
-readlock() { cat /proc/locks | awk '{print $5}' | grep -v ^0 | xargs -I {1} find /proc/{1}/fd -maxdepth 1 -exec readlink {} \\; | grep '^/var/lib/dpkg/lock$'; }
-while test -n "$(readlock)"; do sleep 1; done
+COMMAND="DEBIAN_FRONTEND=noninteractive apt update >>/dev/null 2>&1"
+eval $COMMAND
+while [ $? -ne 0 ]
+do
+sleep 30s
+eval $COMMAND
+done
 echo " "
     PRINT_JSON
     base
