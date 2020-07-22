@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.6.2](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.2) (2020-07-22)
+
+[Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.1...0.6.2)
+
+**Closed issues:**
+
+- Debian 9.8/10 timing out on audits [\#22](https://github.com/dev-sec/linux-patch-baseline/issues/22)
+
+**Merged pull requests:**
+
+- Updated to use a while loop for releasing "apt update" lock [\#28](https://github.com/dev-sec/linux-patch-baseline/pull/28) ([mattray](https://github.com/mattray))
+
+## [0.6.1](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.1) (2020-05-19)
+
+[Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.0...0.6.1)
+
+**Merged pull requests:**
+
+- align versions [\#27](https://github.com/dev-sec/linux-patch-baseline/pull/27) ([micheelengronne](https://github.com/micheelengronne))
+
 ## [0.6.0](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.0) (2020-05-19)
 
 [Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.5.0...0.6.0)
@@ -22,7 +42,6 @@
 
 **Merged pull requests:**
 
-- align versions [\#27](https://github.com/dev-sec/linux-patch-baseline/pull/27) ([micheelengronne](https://github.com/micheelengronne))
 - Bump version to 0.5.0 and switch to inspec 3 for check [\#23](https://github.com/dev-sec/linux-patch-baseline/pull/23) ([alexpop](https://github.com/alexpop))
 - Update issue templates [\#21](https://github.com/dev-sec/linux-patch-baseline/pull/21) ([rndmh3ro](https://github.com/rndmh3ro))
 - allow yum to run as non-root user. [\#20](https://github.com/dev-sec/linux-patch-baseline/pull/20) ([iveskins](https://github.com/iveskins))
