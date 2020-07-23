@@ -70,6 +70,13 @@ jobs:
         run: |
           echo "commitish: ${GITHUB_SHA}"
 
+      - name: Get current commitish
+        id: current_commitish
+        run: echo "::set-output name=sha::$(git log -1 --format="%H")"
+
+      - name: Check outputs
+        run: echo ${{ steps.current_commitish.outputs.sha }}
+
       - name: Create Release draft
         id: create_release
         uses: actions/create-release@v1
