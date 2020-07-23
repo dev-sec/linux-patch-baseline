@@ -54,6 +54,8 @@ jobs:
           name: dev-sec CI
           email: hello@dev-sec.io
 
+      - uses: actions/checkout@v1
+
       - name: Read CHANGELOG.md
         id: package
         uses: juliangruber/read-file-action@v1
