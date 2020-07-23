@@ -6,6 +6,7 @@
 
 **Merged pull requests:**
 
+- use commitish [\#43](https://github.com/dev-sec/linux-patch-baseline/pull/43) ([micheelengronne](https://github.com/micheelengronne))
 - debugging more commitish [\#42](https://github.com/dev-sec/linux-patch-baseline/pull/42) ([micheelengronne](https://github.com/micheelengronne))
 - get GITHUB\_SHA to check [\#41](https://github.com/dev-sec/linux-patch-baseline/pull/41) ([micheelengronne](https://github.com/micheelengronne))
 - debug commitish [\#40](https://github.com/dev-sec/linux-patch-baseline/pull/40) ([micheelengronne](https://github.com/micheelengronne))
@@ -24,6 +25,7 @@
 **Merged pull requests:**
 
 - read the CHANGELOG before the checkout [\#32](https://github.com/dev-sec/linux-patch-baseline/pull/32) ([micheelengronne](https://github.com/micheelengronne))
+- checkout before creating the release draft [\#31](https://github.com/dev-sec/linux-patch-baseline/pull/31) ([micheelengronne](https://github.com/micheelengronne))
 
 ## [0.6.3](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.3) (2020-07-23)
 
@@ -43,7 +45,6 @@
 
 **Merged pull requests:**
 
-- checkout before creating the release draft [\#31](https://github.com/dev-sec/linux-patch-baseline/pull/31) ([micheelengronne](https://github.com/micheelengronne))
 - Updated to use a while loop for releasing "apt update" lock [\#28](https://github.com/dev-sec/linux-patch-baseline/pull/28) ([mattray](https://github.com/mattray))
 
 ## [0.6.1](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.1) (2020-05-19)
