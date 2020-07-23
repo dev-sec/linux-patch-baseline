@@ -64,8 +64,7 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 2
-      - run: git checkout HEAD^
+          ref: master
 
       - name: Create Release draft
         id: create_release
