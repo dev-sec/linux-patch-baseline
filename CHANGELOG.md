@@ -6,6 +6,7 @@
 
 **Merged pull requests:**
 
+- pull the master [\#34](https://github.com/dev-sec/linux-patch-baseline/pull/34) ([micheelengronne](https://github.com/micheelengronne))
 - Version checkout [\#33](https://github.com/dev-sec/linux-patch-baseline/pull/33) ([micheelengronne](https://github.com/micheelengronne))
 
 ## [0.6.4](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.4) (2020-07-23)
