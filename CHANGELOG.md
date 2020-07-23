@@ -6,6 +6,7 @@
 
 **Merged pull requests:**
 
+- checkout master hopefully [\#35](https://github.com/dev-sec/linux-patch-baseline/pull/35) ([micheelengronne](https://github.com/micheelengronne))
 - pull the master [\#34](https://github.com/dev-sec/linux-patch-baseline/pull/34) ([micheelengronne](https://github.com/micheelengronne))
 - Version checkout [\#33](https://github.com/dev-sec/linux-patch-baseline/pull/33) ([micheelengronne](https://github.com/micheelengronne))
 
