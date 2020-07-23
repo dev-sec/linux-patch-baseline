@@ -11,6 +11,8 @@ jobs:
     name: create release draft
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: 'Get Previous tag'
         id: previoustag
