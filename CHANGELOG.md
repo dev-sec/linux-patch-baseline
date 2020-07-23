@@ -6,13 +6,14 @@
 
 **Merged pull requests:**
 
+- debug commitish [\#40](https://github.com/dev-sec/linux-patch-baseline/pull/40) ([micheelengronne](https://github.com/micheelengronne))
 - try to trick the checkout action to get the last master commit [\#39](https://github.com/dev-sec/linux-patch-baseline/pull/39) ([micheelengronne](https://github.com/micheelengronne))
 - checkout HEAD [\#38](https://github.com/dev-sec/linux-patch-baseline/pull/38) ([micheelengronne](https://github.com/micheelengronne))
 - fetch all depth [\#37](https://github.com/dev-sec/linux-patch-baseline/pull/37) ([micheelengronne](https://github.com/micheelengronne))
 - use checkout@v2 [\#36](https://github.com/dev-sec/linux-patch-baseline/pull/36) ([micheelengronne](https://github.com/micheelengronne))
 - checkout master hopefully [\#35](https://github.com/dev-sec/linux-patch-baseline/pull/35) ([micheelengronne](https://github.com/micheelengronne))
 - pull the master [\#34](https://github.com/dev-sec/linux-patch-baseline/pull/34) ([micheelengronne](https://github.com/micheelengronne))
-- Bump version to 0.5.0 and switch to inspec 3 for check [\#23](https://github.com/dev-sec/linux-patch-baseline/pull/23) ([alexpop](https://github.com/alexpop))
+- Version checkout [\#33](https://github.com/dev-sec/linux-patch-baseline/pull/33) ([micheelengronne](https://github.com/micheelengronne))
 
 ## [0.6.4](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.4) (2020-07-23)
 
@@ -20,7 +21,6 @@
 
 **Merged pull requests:**
 
-- Version checkout [\#33](https://github.com/dev-sec/linux-patch-baseline/pull/33) ([micheelengronne](https://github.com/micheelengronne))
 - read the CHANGELOG before the checkout [\#32](https://github.com/dev-sec/linux-patch-baseline/pull/32) ([micheelengronne](https://github.com/micheelengronne))
 - checkout before creating the release draft [\#31](https://github.com/dev-sec/linux-patch-baseline/pull/31) ([micheelengronne](https://github.com/micheelengronne))
 
@@ -74,6 +74,7 @@
 
 **Merged pull requests:**
 
+- Bump version to 0.5.0 and switch to inspec 3 for check [\#23](https://github.com/dev-sec/linux-patch-baseline/pull/23) ([alexpop](https://github.com/alexpop))
 - Update issue templates [\#21](https://github.com/dev-sec/linux-patch-baseline/pull/21) ([rndmh3ro](https://github.com/rndmh3ro))
 - allow yum to run as non-root user. [\#20](https://github.com/dev-sec/linux-patch-baseline/pull/20) ([iveskins](https://github.com/iveskins))
 - small typo in the packages method [\#18](https://github.com/dev-sec/linux-patch-baseline/pull/18) ([aaronlippold](https://github.com/aaronlippold))
