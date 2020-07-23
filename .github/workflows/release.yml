@@ -49,10 +49,10 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           push-branch: 'master'
           commit-message: 'update inspec.yml and changelog'
-          force-add: 'true'
           files: inspec.yml CHANGELOG.md
           name: dev-sec CI
           email: hello@dev-sec.io
+          rebase: 'true'
 
       - name: Read CHANGELOG.md
         id: package
@@ -62,8 +62,7 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 2
-      - run: git pull
+          ref: master
 
       - name: Create Release draft
         id: create_release
