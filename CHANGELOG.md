@@ -6,6 +6,7 @@
 
 **Merged pull requests:**
 
+- get GITHUB\_SHA to check [\#41](https://github.com/dev-sec/linux-patch-baseline/pull/41) ([micheelengronne](https://github.com/micheelengronne))
 - debug commitish [\#40](https://github.com/dev-sec/linux-patch-baseline/pull/40) ([micheelengronne](https://github.com/micheelengronne))
 - try to trick the checkout action to get the last master commit [\#39](https://github.com/dev-sec/linux-patch-baseline/pull/39) ([micheelengronne](https://github.com/micheelengronne))
 - checkout HEAD [\#38](https://github.com/dev-sec/linux-patch-baseline/pull/38) ([micheelengronne](https://github.com/micheelengronne))
@@ -21,7 +22,6 @@
 
 **Merged pull requests:**
 
-- read the CHANGELOG before the checkout [\#32](https://github.com/dev-sec/linux-patch-baseline/pull/32) ([micheelengronne](https://github.com/micheelengronne))
 - checkout before creating the release draft [\#31](https://github.com/dev-sec/linux-patch-baseline/pull/31) ([micheelengronne](https://github.com/micheelengronne))
 
 ## [0.6.3](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.3) (2020-07-23)
@@ -50,6 +50,7 @@
 
 **Merged pull requests:**
 
+- read the CHANGELOG before the checkout [\#32](https://github.com/dev-sec/linux-patch-baseline/pull/32) ([micheelengronne](https://github.com/micheelengronne))
 - align versions [\#27](https://github.com/dev-sec/linux-patch-baseline/pull/27) ([micheelengronne](https://github.com/micheelengronne))
 
 ## [0.6.0](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.0) (2020-05-19)
@@ -78,6 +79,7 @@
 - Update issue templates [\#21](https://github.com/dev-sec/linux-patch-baseline/pull/21) ([rndmh3ro](https://github.com/rndmh3ro))
 - allow yum to run as non-root user. [\#20](https://github.com/dev-sec/linux-patch-baseline/pull/20) ([iveskins](https://github.com/iveskins))
 - small typo in the packages method [\#18](https://github.com/dev-sec/linux-patch-baseline/pull/18) ([aaronlippold](https://github.com/aaronlippold))
+- print system patches in a nicer way [\#16](https://github.com/dev-sec/linux-patch-baseline/pull/16) ([arlimus](https://github.com/arlimus))
 
 ## [0.4.0](https://github.com/dev-sec/linux-patch-baseline/tree/0.4.0) (2018-04-12)
 
@@ -90,7 +92,6 @@
 **Merged pull requests:**
 
 - fix vulnerable rubocop version for testing [\#17](https://github.com/dev-sec/linux-patch-baseline/pull/17) ([arlimus](https://github.com/arlimus))
-- print system patches in a nicer way [\#16](https://github.com/dev-sec/linux-patch-baseline/pull/16) ([arlimus](https://github.com/arlimus))
 - add suse support [\#15](https://github.com/dev-sec/linux-patch-baseline/pull/15) ([arlimus](https://github.com/arlimus))
 - Remove puts from updates [\#14](https://github.com/dev-sec/linux-patch-baseline/pull/14) ([coolguru](https://github.com/coolguru))
 - fix linting errors [\#12](https://github.com/dev-sec/linux-patch-baseline/pull/12) ([arlimus](https://github.com/arlimus))
