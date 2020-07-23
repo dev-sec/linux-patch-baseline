@@ -6,6 +6,7 @@
 
 **Merged pull requests:**
 
+- checkout HEAD [\#38](https://github.com/dev-sec/linux-patch-baseline/pull/38) ([micheelengronne](https://github.com/micheelengronne))
 - fetch all depth [\#37](https://github.com/dev-sec/linux-patch-baseline/pull/37) ([micheelengronne](https://github.com/micheelengronne))
 - use checkout@v2 [\#36](https://github.com/dev-sec/linux-patch-baseline/pull/36) ([micheelengronne](https://github.com/micheelengronne))
 - checkout master hopefully [\#35](https://github.com/dev-sec/linux-patch-baseline/pull/35) ([micheelengronne](https://github.com/micheelengronne))
