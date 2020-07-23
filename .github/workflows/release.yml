@@ -66,6 +66,14 @@ jobs:
         with:
           ref: master
 
+      - name: Debug commitish
+        run: |
+          echo "version: ${VERSION}"
+          echo "commitish: ${COMMITISH}"
+        env:
+          VERSION: ${{ env.version }}
+          COMMITISH: ${{ env.commitish }}
+
       - name: Create Release draft
         id: create_release
         uses: actions/create-release@v1
