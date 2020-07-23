@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     name: create release draft
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
       - name: 'Get Previous tag'
         id: previoustag
@@ -61,8 +61,6 @@ jobs:
           path: ./CHANGELOGRELEASE.md
 
       - uses: actions/checkout@v2
-        with:
-          ref: master
 
       - name: Create Release draft
         id: create_release
