@@ -66,20 +66,16 @@ jobs:
         with:
           ref: master
 
-      - name: Debug commitish
-        run: |
-          echo "commitish: ${GITHUB_SHA}"
-
       - name: Get current commitish
         id: current_commitish
         run: echo "::set-output name=sha::$(git log -1 --format="%H")"
 
-      - name: Check outputs
+      - name: Check it
         run: echo ${{ steps.current_commitish.outputs.sha }}
 
       - name: Create Release draft
         id: create_release
-        uses: actions/create-release@v1
+        uses: actions/create-release@v1.1.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
@@ -87,4 +83,5 @@ jobs:
           tag_name: ${{ steps.version.outputs.next-version }}
           body: |
             ${{ steps.package.outputs.content }}
+          commitish: ${{ steps.current_commitish.outputs.sha }}
           draft: true
