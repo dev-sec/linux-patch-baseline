@@ -63,6 +63,9 @@ jobs:
           path: ./CHANGELOGRELEASE.md
 
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - run: git checkout HEAD^
 
       - name: Create Release draft
         id: create_release
