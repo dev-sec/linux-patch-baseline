@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.5](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.5) (2020-07-23)
+
+[Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.4...0.6.5)
+
+**Merged pull requests:**
+
+- Version checkout [\#33](https://github.com/dev-sec/linux-patch-baseline/pull/33) ([micheelengronne](https://github.com/micheelengronne))
+
 ## [0.6.4](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.4) (2020-07-23)
 
 [Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.3...0.6.4)
