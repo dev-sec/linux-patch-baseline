@@ -1,12 +1,29 @@
 # Changelog
 
-## [0.6.2](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.2) (2020-07-22)
+## [0.6.4](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.4) (2020-07-23)
 
-[Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.1...0.6.2)
+[Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.3...0.6.4)
+
+**Merged pull requests:**
+
+- read the CHANGELOG before the checkout [\#32](https://github.com/dev-sec/linux-patch-baseline/pull/32) ([micheelengronne](https://github.com/micheelengronne))
+- checkout before creating the release draft [\#31](https://github.com/dev-sec/linux-patch-baseline/pull/31) ([micheelengronne](https://github.com/micheelengronne))
+
+## [0.6.3](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.3) (2020-07-23)
+
+[Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.2...0.6.3)
 
 **Closed issues:**
 
 - Debian 9.8/10 timing out on audits [\#22](https://github.com/dev-sec/linux-patch-baseline/issues/22)
+
+**Merged pull requests:**
+
+- version revert in hope to trigger github actions correctly [\#30](https://github.com/dev-sec/linux-patch-baseline/pull/30) ([micheelengronne](https://github.com/micheelengronne))
+
+## [0.6.2](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.2) (2020-07-22)
+
+[Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.1...0.6.2)
 
 **Merged pull requests:**
 
