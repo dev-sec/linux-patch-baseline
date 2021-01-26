@@ -1,5 +1,6 @@
 #!/usr/bin/env rake
 # encoding: utf-8
+# frozen_string_literal: true
 
 require 'rake/testtask'
 require 'rubocop/rake_task'
