@@ -198,6 +198,7 @@ end
 
 class RHELUpdateFetcher < UpdateFetcher
   def packages
+    # rubocop:disable Style/FormatStringToken
     rhel_packages = <<~PRINT_JSON
       sleep 2 && echo " "
       echo -n '{"installed":['
@@ -206,6 +207,7 @@ class RHELUpdateFetcher < UpdateFetcher
       echo -n ']}'
     PRINT_JSON
     parse_json(rhel_packages)
+    # rubocop:enable Style/FormatStringToken
   end
 
   def updates
