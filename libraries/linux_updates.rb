@@ -1,4 +1,6 @@
 # encoding: utf-8
+# frozen_string_literal: true
+
 # copyright: 2016, Christoph Hartmann
 # copyright: 2016, Dominik Richter
 # license: MPLv2
@@ -25,6 +27,7 @@ class LinuxUpdateManager < Inspec.resource(1)
 
   # Since Amazon Linux is based on RedHat, they may use the same method.
   def initialize
+    super
     case inspec.os[:family]
     when 'redhat', 'amazon'
       @update_mgmt = RHELUpdateFetcher.new(inspec)
@@ -99,7 +102,7 @@ class UpdateFetcher
     begin
       JSON.parse(cmd.stdout)
     rescue JSON::ParserError => _e
-      return []
+      []
     end
   end
 end
@@ -107,9 +110,9 @@ end
 PatchEntry = Struct.new(:name, :version, :arch, :category, :severity) do
   def to_s
     r = "System Patch #{name} (v#{version} #{arch}"
-    r+= ", #{category}" unless category.nil?
-    r+= ", #{severity}" unless severity.nil?
-    r + ')'
+    r += ", #{category}" unless category.nil?
+    r += ", #{severity}" unless severity.nil?
+    "#{r})"
   end
 end
 
@@ -135,10 +138,8 @@ class SuseUpdateFetcher < UpdateFetcher
   private
 
   def zypper_xml(cmd)
-    out = @inspec.command('zypper --xmlout '+cmd)
-    if out.exit_status != 0
-      fail_resource('Cannot retrieve package updates from the OS: '+out.stderr)
-    end
+    out = @inspec.command("zypper --xmlout #{cmd}")
+    fail_resource("Cannot retrieve package updates from the OS: #{out.stderr}") if out.exit_status != 0
     out.stdout.force_encoding('UTF-8')
   end
 
@@ -149,7 +150,7 @@ class SuseUpdateFetcher < UpdateFetcher
     REXML::XPath.each(updates_el, 'update') do |el|
       a = el.attributes
       res.push(
-        PatchEntry.new(a['name'], a['edition'], a['arch'], a['category'], a['severity']),
+        PatchEntry.new(a['name'], a['edition'], a['arch'], a['category'], a['severity'])
       )
     end
     res
@@ -158,22 +159,22 @@ end
 
 class DebianUpdateFetcher < UpdateFetcher
   def packages
-    debian_packages = debian_base + <<-PRINT_JSON
-echo -n '{"installed":['
-dpkg-query -W -f='${Status}\\t${Package}\\t${Version}\\t${Architecture}\\n' |\\
-  grep '^install ok installed\\s' |\\
-  awk '{ printf "{\\"name\\":\\""$4"\\",\\"version\\":\\""$5"\\",\\"arch\\":\\""$6"\\"}," }' | rev | cut -c 2- | rev | tr -d '\\n'
-echo -n ']}'
+    debian_packages = debian_base + <<~PRINT_JSON
+      echo -n '{"installed":['
+      dpkg-query -W -f='${Status}\\t${Package}\\t${Version}\\t${Architecture}\\n' |\\
+        grep '^install ok installed\\s' |\\
+        awk '{ printf "{\\"name\\":\\""$4"\\",\\"version\\":\\""$5"\\",\\"arch\\":\\""$6"\\"}," }' | rev | cut -c 2- | rev | tr -d '\\n'
+      echo -n ']}'
     PRINT_JSON
     parse_json(debian_packages)
   end
 
   def updates
-    debian_updates = debian_base + <<-PRINT_JSON
-echo -n '{"available":['
-DEBIAN_FRONTEND=noninteractive apt upgrade --dry-run | grep Inst | tr -d '[]()' |\\
-  awk '{ printf "{\\"name\\":\\""$2"\\",\\"version\\":\\""$4"\\",\\"repo\\":\\""$5"\\",\\"arch\\":\\""$6"\\"}," }' | rev | cut -c 2- | rev | tr -d '\\n'
-echo -n ']}'
+    debian_updates = debian_base + <<~PRINT_JSON
+      echo -n '{"available":['
+      DEBIAN_FRONTEND=noninteractive apt upgrade --dry-run | grep Inst | tr -d '[]()' |\\
+        awk '{ printf "{\\"name\\":\\""$2"\\",\\"version\\":\\""$4"\\",\\"repo\\":\\""$5"\\",\\"arch\\":\\""$6"\\"}," }' | rev | cut -c 2- | rev | tr -d '\\n'
+      echo -n ']}'
     PRINT_JSON
     parse_json(debian_updates)
   end
@@ -181,42 +182,43 @@ echo -n ']}'
   private
 
   def debian_base
-    base = <<-PRINT_JSON
-#!/bin/sh
-COMMAND="DEBIAN_FRONTEND=noninteractive apt update >>/dev/null 2>&1"
-eval $COMMAND
-while [ $? -ne 0 ]
-do
-sleep 30s
-eval $COMMAND
-done
-echo " "
+    <<~PRINT_JSON
+      #!/bin/sh
+      COMMAND="DEBIAN_FRONTEND=noninteractive apt update >>/dev/null 2>&1"
+      eval $COMMAND
+      while [ $? -ne 0 ]
+      do
+      sleep 30s
+      eval $COMMAND
+      done
+      echo " "
     PRINT_JSON
-    base
   end
 end
 
 class RHELUpdateFetcher < UpdateFetcher
   def packages
-    rhel_packages = <<-PRINT_JSON
-sleep 2 && echo " "
-echo -n '{"installed":['
-rpm -qa --queryformat '"name":"%{NAME}","version":"%{VERSION}-%{RELEASE}","arch":"%{ARCH}"\\n' |\\
-  awk '{ printf "{"$1"}," }' | rev | cut -c 2- | rev | tr -d '\\n'
-echo -n ']}'
+    # rubocop:disable Style/FormatStringToken
+    rhel_packages = <<~PRINT_JSON
+      sleep 2 && echo " "
+      echo -n '{"installed":['
+      rpm -qa --queryformat '"name":"%{NAME}","version":"%{VERSION}-%{RELEASE}","arch":"%{ARCH}"\\n' |\\
+        awk '{ printf "{"$1"}," }' | rev | cut -c 2- | rev | tr -d '\\n'
+      echo -n ']}'
     PRINT_JSON
     parse_json(rhel_packages)
+    # rubocop:enable Style/FormatStringToken
   end
 
   def updates
-    rhel_updates = <<-PRINT_JSON
-#!/bin/sh
-python -c 'import sys; sys.path.insert(0, "/usr/share/yum-cli"); import cli; ybc = cli.YumBaseCli(); ybc.setCacheDir("/tmp"); list = ybc.returnPkgLists(["updates"]);res = ["{\\"name\\":\\""+x.name+"\\", \\"version\\":\\""+x.version+"-"+x.release+"\\",\\"arch\\":\\""+x.arch+"\\",\\"repository\\":\\""+x.repo.id+"\\"}" for x in list.updates]; print "{\\"available\\":["+",".join(res)+"]}"'
+    rhel_updates = <<~PRINT_JSON
+      #!/bin/sh
+      python -c 'import sys; sys.path.insert(0, "/usr/share/yum-cli"); import cli; ybc = cli.YumBaseCli(); ybc.setCacheDir("/tmp"); list = ybc.returnPkgLists(["updates"]);res = ["{\\"name\\":\\""+x.name+"\\", \\"version\\":\\""+x.version+"-"+x.release+"\\",\\"arch\\":\\""+x.arch+"\\",\\"repository\\":\\""+x.repo.id+"\\"}" for x in list.updates]; print "{\\"available\\":["+",".join(res)+"]}"'
     PRINT_JSON
     cmd = @inspec.bash(rhel_updates)
-    unless cmd.exit_status == 0
+    unless cmd.exit_status.zero?
       # essentially we want https://github.com/chef/inspec/issues/1205
-      STDERR.puts 'Could not determine patch status.'
+      warn 'Could not determine patch status.'
       return nil
     end
 
@@ -225,7 +227,7 @@ python -c 'import sys; sys.path.insert(0, "/usr/share/yum-cli"); import cli; ybc
     begin
       JSON.parse(res)
     rescue JSON::ParserError => _e
-      return []
+      []
     end
   end
 end
