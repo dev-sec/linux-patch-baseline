@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.7](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.7) (2021-02-02)
+
+[Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.6...0.6.7)
+
+**Merged pull requests:**
+
+- use version tag for changelog action [\#46](https://github.com/dev-sec/linux-patch-baseline/pull/46) ([schurzi](https://github.com/schurzi))
+
 ## [0.6.6](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.6) (2021-01-29)
 
 [Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.5...0.6.6)
@@ -47,7 +55,6 @@
 **Merged pull requests:**
 
 - version revert in hope to trigger github actions correctly [\#30](https://github.com/dev-sec/linux-patch-baseline/pull/30) ([micheelengronne](https://github.com/micheelengronne))
-- align versions [\#27](https://github.com/dev-sec/linux-patch-baseline/pull/27) ([micheelengronne](https://github.com/micheelengronne))
 
 ## [0.6.2](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.2) (2020-07-22)
 
@@ -60,6 +67,10 @@
 ## [0.6.1](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.1) (2020-05-19)
 
 [Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.0...0.6.1)
+
+**Merged pull requests:**
+
+- align versions [\#27](https://github.com/dev-sec/linux-patch-baseline/pull/27) ([micheelengronne](https://github.com/micheelengronne))
 
 ## [0.6.0](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.0) (2020-05-19)
 
