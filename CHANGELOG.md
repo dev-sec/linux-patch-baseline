@@ -1,11 +1,12 @@
 # Changelog
 
-## [0.6.7](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.7) (2021-02-02)
+## [0.6.7](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.7) (2021-03-22)
 
 [Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.6...0.6.7)
 
 **Merged pull requests:**
 
+- add dependency to chef-config for CI [\#48](https://github.com/dev-sec/linux-patch-baseline/pull/48) ([schurzi](https://github.com/schurzi))
 - use version tag for changelog action [\#46](https://github.com/dev-sec/linux-patch-baseline/pull/46) ([schurzi](https://github.com/schurzi))
 
 ## [0.6.6](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.6) (2021-01-29)
