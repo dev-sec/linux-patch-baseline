@@ -1,4 +1,3 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
 # copyright: 2016, Christoph Hartmann
@@ -49,7 +48,7 @@ class LinuxUpdateManager < Inspec.resource(1)
   end
 
   def uptodate?
-    return nil if @update_mgmt.nil?
+    return if @update_mgmt.nil?
 
     u = @update_mgmt.updates
     return false if u.nil? || !u['available'].empty?
@@ -219,7 +218,7 @@ class RHELUpdateFetcher < UpdateFetcher
     unless cmd.exit_status.zero?
       # essentially we want https://github.com/chef/inspec/issues/1205
       warn 'Could not determine patch status.'
-      return nil
+      return
     end
 
     first = cmd.stdout.index('{')
