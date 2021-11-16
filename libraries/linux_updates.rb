@@ -212,22 +212,11 @@ class RHELUpdateFetcher < UpdateFetcher
 
   def updates
     rhel_updates = <<~PRINT_JSON
-      #!/bin/sh
-      python -c 'import sys; sys.path.insert(0, "/usr/share/yum-cli"); import cli; ybc = cli.YumBaseCli(); ybc.setCacheDir("/tmp"); list = ybc.returnPkgLists(["updates"]);res = ["{\\"name\\":\\""+x.name+"\\", \\"version\\":\\""+x.version+"-"+x.release+"\\",\\"arch\\":\\""+x.arch+"\\",\\"repository\\":\\""+x.repo.id+"\\"}" for x in list.updates]; print "{\\"available\\":["+",".join(res)+"]}"'
+      echo -n '{"available":['
+      yum check-update -q | awk '{$1=$1}1' | awk '!/Packages/' | tr [:space:] '\n' | grep "\S" | awk '{if (NR%3) printf("%s ", $0); else printf("%s\n", $0)}' | sed 's/[.]/ /1' |\\
+      awk '{ printf "{\\"name\\":\\""$1"\\",\\"version\\":\\""$3"\\",\\"repo\\":\\""$4"\\",\\"arch\\":\\""$2"\\"}," }' | rev | cut -c 2- | rev | tr -d '\\n'
+      echo -n ']}'
     PRINT_JSON
-    cmd = @inspec.bash(rhel_updates)
-    unless cmd.exit_status.zero?
-      # essentially we want https://github.com/chef/inspec/issues/1205
-      warn 'Could not determine patch status.'
-      return nil
-    end
-
-    first = cmd.stdout.index('{')
-    res = cmd.stdout.slice(first, cmd.stdout.size - first)
-    begin
-      JSON.parse(res)
-    rescue JSON::ParserError => _e
-      []
-    end
+    parse_json(rhel_updates)
   end
 end
