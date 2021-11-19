@@ -213,8 +213,8 @@ class RHELUpdateFetcher < UpdateFetcher
   def updates
     rhel_updates = <<~PRINT_JSON
       echo -n '{"available":['
-      yum check-update -q | awk '{$1=$1}1' | awk '!/Packages/' | tr [:space:] '\n' | grep "\S" | awk '{if (NR%3) printf("%s ", $0); else printf("%s\n", $0)}' | sed 's/[.]/ /1' |\\
-      awk '{ printf "{\\"name\\":\\""$1"\\",\\"version\\":\\""$3"\\",\\"repo\\":\\""$4"\\",\\"arch\\":\\""$2"\\"}," }' | rev | cut -c 2- | rev | tr -d '\\n'
+      sudo yum check-update -q | awk '{$1=$1}1' | awk '!/Packages/' | tr [:space:] '\\n' | grep "\\S" | awk '{if (NR%3) printf("%s ", $0); else printf("%s\\n", $0)}' | sed 's/[.]/ /1' |\\
+        awk '{ printf "{\\"name\\":\\""$1"\\",\\"version\\":\\""$3"\\",\\"repo\\":\\""$4"\\",\\"arch\\":\\""$2"\\"}," }' | rev | cut -c 2- | rev | tr -d '\\n'
       echo -n ']}'
     PRINT_JSON
     parse_json(rhel_updates)
