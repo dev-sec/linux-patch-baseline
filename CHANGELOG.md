@@ -1,11 +1,12 @@
 # Changelog
 
-## [0.6.7](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.7) (2021-04-24)
+## [0.6.7](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.7) (2022-01-12)
 
 [Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.6...0.6.7)
 
 **Merged pull requests:**
 
+- Minimum requirements [\#55](https://github.com/dev-sec/linux-patch-baseline/pull/55) ([micheelengronne](https://github.com/micheelengronne))
 - fix rubocop error for Rakefile [\#50](https://github.com/dev-sec/linux-patch-baseline/pull/50) ([schurzi](https://github.com/schurzi))
 - add dependency to chef-config for CI [\#48](https://github.com/dev-sec/linux-patch-baseline/pull/48) ([schurzi](https://github.com/schurzi))
 - use version tag for changelog action [\#46](https://github.com/dev-sec/linux-patch-baseline/pull/46) ([schurzi](https://github.com/schurzi))
