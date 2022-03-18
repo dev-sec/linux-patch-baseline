@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.8](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.8) (2022-03-18)
+
+[Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.7...0.6.8)
+
+**Merged pull requests:**
+
+- Change linting to Cookstyle [\#56](https://github.com/dev-sec/linux-patch-baseline/pull/56) ([schurzi](https://github.com/schurzi))
+
 ## [0.6.7](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.7) (2022-01-12)
 
 [Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.6...0.6.7)
