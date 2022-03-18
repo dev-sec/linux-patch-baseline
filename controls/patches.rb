@@ -1,4 +1,3 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
 # copyright: 2016, Christoph Hartmann

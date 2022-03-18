@@ -1,7 +1,7 @@
 #!/usr/bin/env rake
-# encoding: utf-8
 # frozen_string_literal: true
 
+require 'cookstyle'
 require 'rake/testtask'
 require 'rubocop/rake_task'
 
@@ -9,6 +9,10 @@ require 'rubocop/rake_task'
 desc 'Run Rubocop lint checks'
 task :rubocop do
   RuboCop::RakeTask.new
+end
+
+RuboCop::RakeTask.new(:cookstyle) do |task|
+  task.options << '--display-cop-names'
 end
 
 # lint the project
@@ -46,5 +50,4 @@ task :changelog do
   Rake::Task[:changelog].execute
 rescue LoadError
   puts '>>>>> GitHub Changelog Generator not loaded, omitting tasks'
-
 end
