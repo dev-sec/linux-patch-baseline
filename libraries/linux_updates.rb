@@ -216,7 +216,7 @@ class RHELUpdateFetcher < UpdateFetcher
                    else
                      <<~PRINT_JSON
                        #!/bin/sh
-                       python -c 'import sys; sys.path.insert(0, "/usr/share/yum-cli"); import cli; ybc = cli.YumBaseCli(); ybc.setCacheDir("/tmp"); list = ybc.returnPkgLists(["updates"]);res = ["{\\"name\\":\\""+x.name+"\\",\\"version\\":\\""+x.version+"-"+x.release+"\\",\\"arch\\":\\""+x.arch+"\\",\\"repository\\":\\""+x.repo.id+"\\"}" for x in list.updates]; print "{\\"available\\":["+",".join(res)+"]}"'
+                       python -c 'import sys; sys.path.insert(0, "/usr/share/yum-cli"); import cli; ybc = cli.YumBaseCli(); ybc.setCacheDir("/tmp"); list = ybc.returnPkgLists(["updates"]);res = ["{\\"name\\":\\""+x.name+"\\", \\"version\\":\\""+x.version+"-"+x.release+"\\",\\"arch\\":\\""+x.arch+"\\",\\"repository\\":\\""+x.repo.id+"\\"}" for x in list.updates]; print "{\\"available\\":["+",".join(res)+"]}"'
                      PRINT_JSON
                    end
     cmd = @inspec.bash(rhel_updates)
