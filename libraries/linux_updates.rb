@@ -208,7 +208,7 @@ class RHELUpdateFetcher < UpdateFetcher
   end
 
   def updates
-    rhel_updates = if os.release.to_i > 7
+    rhel_updates = if @inspec.os.release.to_i > 7
                      <<~PRINT_JSON
                        #!/usr/bin/sh
                        /usr/libexec/platform-python -c 'import dnf; base = dnf.Base(); base.read_all_repos(); base.fill_sack(); q = base.sack.query(); list = list(q.upgrades()); res = ["{\\"name\\":\\""+x.name+"\\",\\"version\\":\\""+x.version+"-"+x.release+"\\",\\"arch\\":\\""+x.arch+"\\",\\"repository\\":\\""+x.reponame+"\\"}" for x in list]; print("{\\"available\\":["+",".join(res)+"]}")'
