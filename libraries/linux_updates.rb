@@ -211,7 +211,7 @@ class RHELUpdateFetcher < UpdateFetcher
     rhel_updates = if @inspec.os.release.to_i > 7
                      <<~PRINT_JSON
                        #!/usr/bin/sh
-                       /usr/libexec/platform-python -c 'import dnf; base = dnf.Base(); base.read_all_repos(); base.fill_sack(); q = base.sack.query(); list = list(q.upgrades()); res = ["{\\"name\\":\\""+x.name+"\\",\\"version\\":\\""+x.version+"-"+x.release+"\\",\\"arch\\":\\""+x.arch+"\\",\\"repository\\":\\""+x.reponame+"\\"}" for x in list]; print("{\\"available\\":["+",".join(res)+"]}")'
+                       /usr/libexec/platform-python -c 'import dnf; base = dnf.Base(); conf = base.conf; conf.substitutions.update_from_etc(conf.installroot); conf.substitutions._update_from_env(); base.read_all_repos(); base.fill_sack(); q = base.sack.query(); list = list(q.upgrades()); res = ["{\\"name\\":\\""+x.name+"\\",\\"version\\":\\""+x.version+"-"+x.release+"\\",\\"arch\\":\\""+x.arch+"\\",\\"repository\\":\\""+x.reponame+"\\"}" for x in list]; print("{\\"available\\":["+",".join(res)+"]}")'
                      PRINT_JSON
                    else
                      <<~PRINT_JSON

@@ -23,28 +23,13 @@ platforms:
   # - name: amazonlinux-2022
   - name: centos-7
   - name: centos-8
+  - name: rockylinux-8
+  - name: rockylinux-9
   - name: debian-10
   - name: debian-11
   - name: ubuntu-20.04
   - name: ubuntu-22.04
-  - name: windows-10
-    driver:
-      box: stromweld/windows-10
-  - name: windows-11
-    driver:
-      box: stromweld/windows-11
-  - name: windows-2012r2
-    driver:
-      box: stromweld/windows-2012r2
-  - name: windows-2016
-    driver:
-      box: stromweld/windows-2016
-  - name: windows-2019
-    driver:
-      box: stromweld/windows-2019
-  - name: windows-2022
-    driver:
-      box: stromweld/windows-2022
+
 
 suites:
   - name: default

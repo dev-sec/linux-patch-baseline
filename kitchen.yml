@@ -40,6 +40,14 @@ platforms:
   driver:
     image: almalinux:9
     privileged: true
+- name: rockylinux-8
+  driver:
+    image: rockylinux:8
+    privileged: true
+- name: rockylinux-9
+  driver:
+    image: rockylinux:9
+    privileged: true
 - name: debian-8
   driver:
     image: debian:8
