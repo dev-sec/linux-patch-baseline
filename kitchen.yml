@@ -1,0 +1,68 @@
+---
+driver:
+  name: docker
+  use_sudo: false
+
+provisioner:
+  name: chef_infra
+
+verifier:
+  name: inspec
+  sudo: true
+
+platforms:
+- name: ubuntu-16.04
+  driver:
+    image: ubuntu:16.04
+- name: ubuntu-18.04
+  driver:
+    image: ubuntu:18.04
+- name: ubuntu-20.04
+  driver:
+    image: ubuntu:20.04
+- name: ubuntu-22.04
+  driver:
+    image: ubuntu:22.04
+- name: centos-6
+  driver:
+    image: centos:6
+- name: centos-7
+  driver:
+    image: centos:7
+- name: centos-8
+  driver:
+    image: centos:8
+- name: almalinux-8
+  driver:
+    image: almalinux:8
+    privileged: true
+- name: almalinux-9
+  driver:
+    image: almalinux:9
+    privileged: true
+- name: rockylinux-8
+  driver:
+    image: rockylinux:8
+    privileged: true
+- name: rockylinux-9
+  driver:
+    image: rockylinux:9
+    privileged: true
+- name: debian-8
+  driver:
+    image: debian:8
+- name: debian-9
+  driver:
+    image: debian:9
+- name: debian-10
+  driver:
+    image: debian:10
+- name: debian-11
+  driver:
+    image: debian:11
+
+suites:
+  - name: default
+    verifier:
+      inspec_tests:
+        - path: .
