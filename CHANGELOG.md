@@ -1,8 +1,16 @@
 # Changelog
 
-## [0.6.8](https://github.com/dev-sec/linux-patch-baseline/tree/0.6.8) (2022-03-18)
+## [0.7.0](https://github.com/dev-sec/linux-patch-baseline/tree/0.7.0) (2022-09-29)
 
-[Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.7...0.6.8)
+[Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.6.7...0.7.0)
+
+**Implemented enhancements:**
+
+- Add rhel 8+ dnf support [\#57](https://github.com/dev-sec/linux-patch-baseline/pull/57) ([Stromweld](https://github.com/Stromweld))
+
+**Closed issues:**
+
+- Amazon Linux Support [\#10](https://github.com/dev-sec/linux-patch-baseline/issues/10)
 
 **Merged pull requests:**
 

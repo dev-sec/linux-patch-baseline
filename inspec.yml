@@ -3,7 +3,7 @@ name: linux-patch-baseline
 title: DevSec Linux Patch Benchmark
 summary: Verifies that all patches have been applied
 inspec_version: '>= 4.6.3'
-version: 0.6.8
+version: 0.7.0
 maintainer: Christoph Hartmann
 copyright: Christoph Hartmann
 copyright_email: chris@lollyrock.com
