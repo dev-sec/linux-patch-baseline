@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.7.1](https://github.com/dev-sec/linux-patch-baseline/tree/0.7.1) (2022-12-05)
+## [0.7.1](https://github.com/dev-sec/linux-patch-baseline/tree/0.7.1) (2023-03-31)
 
 [Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.7.0...0.7.1)
 
@@ -8,6 +8,14 @@
 
 - Version 8 Does not work with baseline [\#47](https://github.com/dev-sec/linux-patch-baseline/issues/47)
 - use centralised issue templates and workflows [\#58](https://github.com/dev-sec/linux-patch-baseline/pull/58) ([schurzi](https://github.com/schurzi))
+
+**Closed issues:**
+
+- \[Security\] Workflow release.yml is using vulnerable action mikefarah/yq [\#54](https://github.com/dev-sec/linux-patch-baseline/issues/54)
+
+**Merged pull requests:**
+
+- Configure Renovate [\#59](https://github.com/dev-sec/linux-patch-baseline/pull/59) ([renovate[bot]](https://github.com/apps/renovate))
 
 ## [0.7.0](https://github.com/dev-sec/linux-patch-baseline/tree/0.7.0) (2022-09-29)
 
