@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.7.1](https://github.com/dev-sec/linux-patch-baseline/tree/0.7.1) (2023-03-31)
+## [0.7.1](https://github.com/dev-sec/linux-patch-baseline/tree/0.7.1) (2023-05-02)
 
 [Full Changelog](https://github.com/dev-sec/linux-patch-baseline/compare/0.7.0...0.7.1)
 
@@ -15,6 +15,7 @@
 
 **Merged pull requests:**
 
+- add spellchecking with codespell [\#60](https://github.com/dev-sec/linux-patch-baseline/pull/60) ([schurzi](https://github.com/schurzi))
 - Configure Renovate [\#59](https://github.com/dev-sec/linux-patch-baseline/pull/59) ([renovate[bot]](https://github.com/apps/renovate))
 
 ## [0.7.0](https://github.com/dev-sec/linux-patch-baseline/tree/0.7.0) (2022-09-29)
@@ -59,10 +60,10 @@
 
 **Merged pull requests:**
 
-- use commitish [\#43](https://github.com/dev-sec/linux-patch-baseline/pull/43) ([micheelengronne](https://github.com/micheelengronne))
-- debugging more commitish [\#42](https://github.com/dev-sec/linux-patch-baseline/pull/42) ([micheelengronne](https://github.com/micheelengronne))
+- use committish [\#43](https://github.com/dev-sec/linux-patch-baseline/pull/43) ([micheelengronne](https://github.com/micheelengronne))
+- debugging more committish [\#42](https://github.com/dev-sec/linux-patch-baseline/pull/42) ([micheelengronne](https://github.com/micheelengronne))
 - get GITHUB\_SHA to check [\#41](https://github.com/dev-sec/linux-patch-baseline/pull/41) ([micheelengronne](https://github.com/micheelengronne))
-- debug commitish [\#40](https://github.com/dev-sec/linux-patch-baseline/pull/40) ([micheelengronne](https://github.com/micheelengronne))
+- debug committish [\#40](https://github.com/dev-sec/linux-patch-baseline/pull/40) ([micheelengronne](https://github.com/micheelengronne))
 - try to trick the checkout action to get the last master commit [\#39](https://github.com/dev-sec/linux-patch-baseline/pull/39) ([micheelengronne](https://github.com/micheelengronne))
 - checkout HEAD [\#38](https://github.com/dev-sec/linux-patch-baseline/pull/38) ([micheelengronne](https://github.com/micheelengronne))
 - fetch all depth [\#37](https://github.com/dev-sec/linux-patch-baseline/pull/37) ([micheelengronne](https://github.com/micheelengronne))
